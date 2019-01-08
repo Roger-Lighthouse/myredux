@@ -1,39 +1,36 @@
 
-function countReducer(state={ count: 0, countplus: 0}, action) {
+function countReducer(state, action) {
 
-  console.log("State", state)
-  // if(state === undefined){
-  //   console.log("I'm IN State")
-  //   return
-  // }
-
-  console.log("State After", state)
+  if(state === undefined){
+    state = {
+      count: 0,
+      countplus: 0
+    }
+  }
 
   switch(action.type){
-    case "increase":
+    case "INCREASE":
       return {
         ...state,
         count: state.count + 1
       }
-    case "decrease":
+    case "DECREASE":
       return {
         ...state,
         count: state.count - 1
       }
-    case "increasePlus":
+    case "INCREASE_PLUS":
       return {
         ...state,
         countplus: state.countplus + 10
       }
-    case "decreasePlus":
+    case "DECREASE_PLUS":
       return {
         ...state,
         countplus: state.countplus - 10
       }
     default:
-      return({
-        ...state
-      })
+      return state
   }
 
 }

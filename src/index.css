@@ -9,11 +9,52 @@ body {
   margin: 100px;
   padding: 10px;
   border-radius: 3px;
-  width: 600px;
+  width: 1000px;
   background-color: darkgray;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#table {
+  width: 800px;
+}
+
+.client-profile {
+  margin-top: 25px;
+  padding: 5px;
+  border-radius: 3px;
+  width: 700px;
+  background-color: lightblue;
+  color: black;
+  display: block;
+
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.client-profile-props {
+  margin-top: 25px;
+  padding: 5px;
+  border-radius: 3px;
+  width: 700px;
+  background-color: lightblue;
+  color: black;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.smart-search {
+  padding: 10px;
+  border-radius: 3px;
+  width: 700px;
+  background-color: white;
+  color: black;
+
 }
 
 .buttons {
@@ -30,5 +71,46 @@ body {
   color: white;
   padding: 10px;
   background-color: blue;
+}
 
+h1, h2, p, ul, li {
+  font-family: sans-serif;
+}
+
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0
+}
+
+ul.header {
+  background-color: #111;
+  padding: 0;
+  width: 800px;
+}
+
+ul.header li a {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 15px;
+  display: inline-block;
+}
+
+.content {
+  background-color: #FFF;
+  padding: 20px;
+}
+
+.content h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.content li {
+  margin-bottom: 10px;
+}
+
+.active {
+  background-color: #0099FF;
 }

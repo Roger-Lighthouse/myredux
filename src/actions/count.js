@@ -2,19 +2,19 @@
 
 
 function increaseAction(){
-  return {type: "increase"}
+  return {type: "INCREASE"}
 }
 
 function decreaseAction(){
-  return {type: "decrease"}
+  return {type: "DECREASE"}
 }
 
 function increasePlusAction(){
-  return {type: "increasePlus"}
+  return {type: "INCREASE_PLUS"}
 }
 
 function decreasePlusAction(){
-  return {type: "decreasePlus"}
+  return {type: "DECREASE_PLUS"}
 }
 
 

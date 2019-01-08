@@ -2,22 +2,18 @@
 import '../index.css'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { increaseAction, decreaseAction } from '../actions/count.js'
-import Counter from '../components/Counter'
-
-
+import { increaseAction, decreaseAction } from '../actions/count'
+import Counter from '../components/counter'
 
 const mapStateToProps = (state) => {
-  console.log("countValue:", state.count)
   return{
-    countValue: state.count
+    countValue: state.count.count
   }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ increaseAction: increaseAction, decreaeAction: decreaseAction }, dispatch)
+    actions: bindActionCreators({ increaseAction: increaseAction, decreaseAction: decreaseAction }, dispatch)
   };
 }
 
