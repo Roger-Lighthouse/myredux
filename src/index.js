@@ -35,14 +35,14 @@ ReactDOM.render(
           <li><NavLink to="/clients">Client</NavLink></li>
           <li><NavLink to="/counter">Counter</NavLink></li>
           <li><NavLink to="/stats">Stats</NavLink></li>
-          <li><NavLink to="/recbles">Receivables</NavLink></li>
+          <li><NavLink to="/joblists">Job Lists</NavLink></li>
         </ul>
         <div className='content'>
           <Route exact path="/" component={ SmartSearch } />
           <Route path="/clients" component={ App1 } />
           <Route path="/counter" component={ App } />
           <Route path="/stats" component={ StatsCompany } />
-          <Route path="/recbles" component={ JobFunctions } />
+          <Route path="/joblists" component={ JobFunctions } />
         </div>
       </div>
     </HashRouter>
