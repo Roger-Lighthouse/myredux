@@ -47,7 +47,6 @@ class ClientMakeSale extends Component {
     this.setState({ show: true });
   }
 
-
   makeSale(e){
     e.preventDefault()
     this.props.makeSale({
@@ -80,11 +79,18 @@ class ClientMakeSale extends Component {
    );
  }
 
+ componentDidMount() {
+  console.log("componentDidMount");
+ }
+
+ componentWillUnmount() {
+   console.log("componentWillUnmount");
+ }
+
  render() {
 
    return(
      <div>
-       <form onSubmit={this.makeSale}>
          <div className="form-group">
            {this.state.jobinfoid}
          </div>
@@ -122,9 +128,8 @@ class ClientMakeSale extends Component {
          </div>
        </div>
        <div className="form-group">
-         <button className="form-control bg-info" data-dismiss="modal" type="submit">Make Sale</button>
+         <button className="form-control bg-info" data-dismiss="modal" onClick={(e) => this.makeSale(e)} type="submit">Make Sale</button>
        </div>
-    </form>
   </div>)
     }
 
