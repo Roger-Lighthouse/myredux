@@ -19,7 +19,6 @@ class SmartSearch extends Component {
 
   fireClientProfile(cfid){
     this.props.actions.clientProfile(cfid)
-    this.props.actions.clientProfileProps(cfid)
     this.setState({
       loading: ""
     })
@@ -42,7 +41,7 @@ class SmartSearch extends Component {
       this.setState({
         loading: "Loading..."
       })
-      this._text.value = ""
+  //    this._text.value = ""
       this.setState({
         text: this._text.value
       })

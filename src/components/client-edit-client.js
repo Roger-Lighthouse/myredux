@@ -46,30 +46,34 @@ class ClientEditClient extends Component {
 
   render(){
     return(
-      <div>
-        <b>Edit Client</b>
-        <form onSubmit={this.editClient}>
-         <input
-           type="text"
-           value = {this.state.name}
-           onChange={this.updateName}
-           ref = {(e)=>this._name = e}
-         />
-         <input
-           type="text"
-           value = {this.state.address}
-           onChange={this.updateAddress}
-           ref = {(e)=>this._address = e}
-         />
-         <input
-           type="text"
-           value = {this.state.phone}
-           onChange={this.updatePhone}
-           ref = {(e)=> this._phone = e}
-         />
-         <button type="submit">Edit Client</button>
-       </form><br/><br/>
-     </div>
+      <div className="bg-info">
+          <form onSubmit={this.editClient}>
+           <input
+             type="text"
+             value = {this.state.name}
+             onChange={this.updateName}
+             ref = {(e)=>this._name = e}
+           />
+           <input
+             type="text"
+             value = {this.state.address}
+             onChange={this.updateAddress}
+             ref = {(e)=>this._address = e}
+           />
+           <input
+             type="text"
+             value = {this.state.phone}
+             onChange={this.updatePhone}
+             ref = {(e)=> this._phone = e}
+           />
+            <button type="submit" onClick={this.editClient}>Edit Client</button>
+         </form>
+      </div>
+
+
+
+
+
     )
   }
 }

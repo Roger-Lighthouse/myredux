@@ -44,10 +44,18 @@ function clientProfile(cfid){
   }
 }
 
-function clientProfileProps(cfid) {
-  const request = axios.get(`http://localhost:3000/api/clients/${cfid}/client_profile_props.json`)
+function refreshClientProfile(cfid){
+  const request = axios.get(`http://localhost:3000/api/clients/${cfid}/client_profile.json`)
   return {
-    type: 'CLIENT_PROFILE_PROPS',
+    type: 'REFRESH_CLIENT_PROFILE',
+    payload: request
+  }
+}
+
+function makeSale(saleInfo){
+  const request = axios.post(`http://localhost:3000/api/clients/make_sale.json`, saleInfo)
+  return {
+    type: 'MAKE_SALE',
     payload: request
   }
 }
@@ -77,5 +85,5 @@ function clientProfileEdit(cfid, name, address, phone, email) {
 }
 
 
-export { addClient, editClient, removeClient, smartSearch, findClients, clientProfile, clientProfileProps,
-        filterClientProfileEdit, clientProfileEdit, getFallJobs}
+export { addClient, editClient, removeClient, smartSearch, findClients, clientProfile, refreshClientProfile,
+        makeSale, filterClientProfileEdit, clientProfileEdit, getFallJobs}

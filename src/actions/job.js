@@ -25,5 +25,18 @@ function addJob(cfid){
 }
 
 
+function deleteUpcomingJob(jobid){
+  const request = axios.get(`http://localhost:3000/api/jobs/${jobid}/delete_upcoming_job.json`)
+  return {
+    type: 'DELETE_JOB',
+    payload: request
+  }
+}
 
-export { upcomingJob, fetchCompletedJobs, addJob }
+function editUpcomingJob(editInfo){
+
+}
+
+
+
+export { upcomingJob, fetchCompletedJobs, addJob, editUpcomingJob, deleteUpcomingJob }

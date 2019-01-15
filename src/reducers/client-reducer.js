@@ -15,9 +15,11 @@ const initialState = {
   smartSearch:[],
   clientProfile: [],
   clientProfileProps: [],
+  clientProfileUpcomingJobs: [],
   filterClientProfile: false,
   editClient: false,
-  fallJobs: []
+  fallJobs: [],
+  saleSuccess: false
 }
 
 
@@ -64,18 +66,27 @@ function clientReducer(state = initialState, action){
         filterClientProfile: false
       })
     case 'CLIENT_PROFILE_FULFILLED':
+      console.log(action.payload)
       return({
         ...state,
-        clientProfile: action.payload.data,
+        clientProfile: action.payload.data.info,
+        clientProfileProps: action.payload.data.props,
+        clientProfileUpcomingJobs: action.payload.data.upcoming,
+        filterClientProfile: true,
         smartSearch: [],
-        filterClientProfile: true
+        saleSuccess: false
       })
-    case 'CLIENT_PROFILE_PROPS_FULFILLED':
+    case 'REFRESH_CLIENT_PROFILE_FULFILLED':
+      console.log(action.payload)
       return({
         ...state,
-        clientProfileProps: action.payload.data,
+        clientProfile: action.payload.data.info,
+        clientProfileProps: action.payload.data.props,
+        clientProfileUpcomingJobs: action.payload.data.upcoming,
+        filterClientProfile: true,
+        saleSuccess: false
       })
-    case 'FILTER_CLIENT_PROFILE_EDIT':
+      case 'FILTER_CLIENT_PROFILE_EDIT':
       return({
         ...state,
         editClient: true
@@ -88,7 +99,13 @@ function clientReducer(state = initialState, action){
         filterClientProfile: true,
         editClient: false
         })
-
+    case 'MAKE_SALE_FULFILLED':
+      console.log(action)
+      return {
+        ...state,
+        upcomingJobs: action.payload.data,
+        saleSuccess: true
+      }
     default:
       return state
   }

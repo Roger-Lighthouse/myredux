@@ -1,6 +1,5 @@
-import { smartSearch } from '../actions/client'
-import { clientProfile } from '../actions/client'
-import { clientProfileProps } from '../actions/client'
+
+import { smartSearch, clientProfile } from '../actions/client'
 
 import SmartSearch from '../components/smart-search'
 import { connect } from 'react-redux'
@@ -16,7 +15,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return{
-      actions: bindActionCreators({ smartSearch, clientProfile, clientProfileProps }, dispatch)
+      actions: bindActionCreators({ smartSearch, clientProfile }, dispatch)
     }
 }
 

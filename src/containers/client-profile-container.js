@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { clientProfile, filterClientProfileEdit, clientProfileEdit } from '../actions/client'
+import { makeSale, clientProfile, refreshClientProfile, filterClientProfileEdit, clientProfileEdit } from '../actions/client'
+import { editUpcomingJob, deleteUpcomingJob } from '../actions/job'
 import ClientProfile from '../components/client-profile'
 
 function mapStateToProps(state){
@@ -12,13 +13,16 @@ function mapStateToProps(state){
     phone: state.client.clientProfile.phone,
     email: state.client.clientProfile.email,
     clientProfileProps: state.client.clientProfileProps,
-    editClient: state.client.editClient
+    editClient: state.client.editClient,
+    saleSuccess: state.client.saleSuccess,
+    clientProfileUpcomingJobs: state.client.clientProfileUpcomingJobs,
+    deletedUpcomingJobID: state.job.deleteUpcomingJobID
   }
 }
 
 function mapDispatchToProps(dispatch){
   return{
-    actions: bindActionCreators({ clientProfile, filterClientProfileEdit, clientProfileEdit }, dispatch)
+    actions: bindActionCreators({ clientProfile, refreshClientProfile, filterClientProfileEdit, clientProfileEdit, makeSale, editUpcomingJob, deleteUpcomingJob }, dispatch)
   }
 }
 

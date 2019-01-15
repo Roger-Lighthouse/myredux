@@ -97,7 +97,8 @@ class ClientProfileEdit extends Component {
               </td>
             </tr>
             <tr>
-              <th><button className="ml-5" type="submit">Edit Client</button></th>
+            <th></th>
+            <th><button className="ml-5" type="submit">Edit Client</button></th>
             </tr>
          </tbody>
       </table>

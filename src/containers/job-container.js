@@ -7,7 +7,7 @@ import { findClients, getFallJobs } from '../actions/client'
 
 function mapStateToProps(state){
   return {
-    upcomingJobs: state.job.upcomingJobs,
+    upcomingJobsTest: state.job.upcomingJobsTest,
     main_client: state.job.main_client,
     completedJobs: state.job.completedJobs,
     jobAdded: state.job.jobAdded,
