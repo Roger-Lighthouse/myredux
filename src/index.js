@@ -5,6 +5,7 @@ import App from "./containers/counter-container"
 import App1 from "./containers/client-container"
 import SmartSearch from './containers/smart-search-container'
 import JobFunctions from './containers/job-container'
+import List from './components/list'
 
 import StatsCompany from "./containers/stats-container"
 import "./index.css"
@@ -36,6 +37,7 @@ ReactDOM.render(
           <li><NavLink to="/counter">Counter</NavLink></li>
           <li><NavLink to="/stats">Stats</NavLink></li>
           <li><NavLink to="/joblists">Job Lists</NavLink></li>
+          <li><NavLink to="/list">List</NavLink></li>
         </ul>
         <div className='content'>
           <Route exact path="/" component={ SmartSearch } />
@@ -43,6 +45,7 @@ ReactDOM.render(
           <Route path="/counter" component={ App } />
           <Route path="/stats" component={ StatsCompany } />
           <Route path="/joblists" component={ JobFunctions } />
+          <Route path="/list" component={ List } />
         </div>
       </div>
     </HashRouter>

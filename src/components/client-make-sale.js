@@ -49,7 +49,7 @@ class ClientMakeSale extends Component {
 
 
   makeSale(e){
-    e.preventDefault()
+    //e.preventDefault()
     this.props.makeSale({
       jobinfoid: this.state.jobinfoid,
       address: this.state.address,
@@ -80,11 +80,12 @@ class ClientMakeSale extends Component {
    );
  }
 
+ 
+
  render() {
 
    return(
      <div>
-       <form onSubmit={this.makeSale}>
          <div className="form-group">
            {this.state.jobinfoid}
          </div>
@@ -122,9 +123,8 @@ class ClientMakeSale extends Component {
          </div>
        </div>
        <div className="form-group">
-         <button className="form-control bg-info" data-dismiss="modal" type="submit">Make Sale</button>
+         <button className="form-control bg-info" data-dismiss="modal" onClick={()=>this.makeSale()} type="submit">Make Sale</button>
        </div>
-    </form>
   </div>)
     }
 
