@@ -122,7 +122,7 @@ class ClientMakeSale extends Component {
          </div>
        </div>
        <div className="form-group">
-         <button className="form-control bg-info" type="submit">Make Sale</button>
+         <button className="form-control bg-info" data-dismiss="modal" type="submit">Make Sale</button>
        </div>
     </form>
   </div>)
