@@ -47,7 +47,6 @@ class ClientMakeSale extends Component {
     this.setState({ show: true });
   }
 
-
   makeSale(e){
     //e.preventDefault()
     this.props.makeSale({
@@ -80,7 +79,13 @@ class ClientMakeSale extends Component {
    );
  }
 
- 
+componentDidMount() {
+  console.log("componentDidMount");
+ }
+
+ componentWillUnmount() {
+   console.log("componentWillUnmount");
+ }
 
  render() {
 
