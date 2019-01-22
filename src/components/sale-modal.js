@@ -37,7 +37,6 @@ class SaleModal extends Component {
       console.log("Trying to Render")
         return (
           <div>
-            <h1>FUCK OFF!!</h1>
                 <div className="container" id="saleModal">
                       <div className="modal fade" id="saleModal" role="dialog">
                         <div className="modal-dialog">

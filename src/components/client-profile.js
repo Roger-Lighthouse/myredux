@@ -8,28 +8,71 @@ class ClientProfile extends Component {
 
   constructor(props){
     super(props)
-
-    this.fireRefreshClientProfile = this.fireRefreshClientProfile.bind(this)
-  }
-
-  fireRefreshClientProfile(cfid){
-    console.log("Refresh Client Profile***")
-    this.props.actions.refreshClientProfile(cfid)
-
-  }
-  render(){
-    console.log("CP Props>>>>>>>", this.props)
-    if(this.props.saleSuccess){
-      console.log("Refresh Client Profile***")
-      this.fireRefreshClientProfile(this.props.cfid)
+    this.state = {
+      cfid: null,
+      address: null,
+      phone: null,
+      rate: null,
+      email: null,
+      cp_up: [],
+      cp_props: []
     }
-    var upcomingJobs = ""
-  //  if(this.props.clientProfileUpcomingJobs.length>0){
-      upcomingJobs = <UpcomingJobs cfid={this.props.cfid} cp_up={this.props.clientProfileUpcomingJobs} editUpcomingJob={this.props.editUpcomingJob} deleteUpcomingJobID={this.props.deleteUpcomingJobID} deleteUpcomingJob={this.props.actions.deleteUpcomingJob} clientProfile={this.props.actions.clientProfile} />
-  //  }
+    this.editUpcomingJob = this.editUpcomingJob.bind(this)
+
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log("OK HERE", nextProps)
+    this.setState({
+      cfid: nextProps.cfid,
+      address: nextProps.address,
+      phone: nextProps.phone,
+      email: nextProps.email,
+      rating: nextProps.rate,
+      cp_up: nextProps.clientProfileUpcomingJobs,
+      cp_props: nextProps.clientProfileProps
+    })
+  }
+
+  editUpcomingJob(id, jobdesc, sdate){
+    this.props.actions.editUpcomingJob(id, jobdesc, sdate)
+
+    let up = this.state.cp_up
+    up = up.map((curr_job)=>{
+      if(curr_job.id===id){
+        curr_job.jobdesc = jobdesc
+        curr_job.sdate = sdate
+      }
+      return curr_job
+    })
+    this.setState({
+      upcomingJobs: up
+    })
+  }
+
+
+  render(){
+    if(!this.state.cfid){
+      return null
+    }
+    var upcomingJobs = null
+
+    console.log("cfid", this.state.cfid)
+    console.log("cp_up", this.state.cp_up)
+    console.log("Edit Up Job", this.editUpcomingJob)
+    console.log("delete", this.props.actions.deleteUpcomingJob)
+    if(this.state.cp_up.length>0){
+
+      upcomingJobs = <UpcomingJobs
+       cfid={[this.state.cfid]}
+       cp_up={this.state.cp_up}
+       editUpcomingJob={this.editUpcomingJob}
+       deleteUpcomingJob={this.props.actions.deleteUpcomingJob}
+      />
+    }
     var propList = ""
     if(this.props.clientProfileProps.length>0){
-     propList = <PropertyList cfid={this.props.cfid} cp_props={this.props.clientProfileProps} saleSuccess={this.props.saleSuccess} makeSale={this.props.actions.makeSale} clientProfile={this.props.actions.clientProfile} />
+     propList = <PropertyList cfid={this.state.cfid} cp_props={this.state.cp_props} makeSale={this.props.actions.makeSale} />
     }
     var editClient = ""
       editClient =
@@ -42,14 +85,12 @@ class ClientProfile extends Component {
         fireEdit={this.props.actions.clientProfileEdit}/>
     return(
       <span className="client-profile">
-      <div className="embed-responsive embed-responsive-16by9">
-        <iframe title="Nuts" className="embed-responsive-item" src="https://www.youtube.com/embed?v=AWyxKrOTGJI&list=RDAWyxKrOTGJI&index=0" allowFullScreen></iframe>
-      </div>
       <div>
+      {this.props.cfid}<br/>
       {this.props.name}&nbsp;[{this.props.rate}]<br/>
-      {this.props.address}(billing)<br/>
-      {this.props.phone}(phone)<br/>
-      {this.props.email}<br/>
+        {this.props.address}(billing)<br/>
+        {this.props.phone}(phone)<br/>
+        {this.props.email}<br/>
       </div>
       <button type="button" className="btn btn-link" data-toggle="modal" data-target="#myModal">Edit Client</button>
       <div className="container" id="edit-client">
@@ -70,8 +111,10 @@ class ClientProfile extends Component {
           </div>
         </div>
       </div>
+      <div>
       { propList }
       { upcomingJobs }
+      </div>
     </span>
     )
   }

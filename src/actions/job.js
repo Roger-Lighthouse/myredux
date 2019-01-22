@@ -33,8 +33,18 @@ function deleteUpcomingJob(jobid){
   }
 }
 
-function editUpcomingJob(editInfo){
-
+function editUpcomingJob(id, jobdesc, sdate){
+  const editInfo = {
+    id: id,
+    jobdesc: jobdesc,
+    sdate: sdate
+  }
+  console.log("EDIT UP JOB")
+  const request = axios.post(`http://localhost:3000/api/jobs/edit_upcoming_job.json`, editInfo)
+  return {
+    type: 'EDIT_UPCOMING_JOB',
+    payload: request
+  }
 }
 
 

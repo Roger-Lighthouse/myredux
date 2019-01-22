@@ -85,5 +85,5 @@ function clientProfileEdit(cfid, name, address, phone, email) {
 }
 
 
-export { addClient, editClient, removeClient, smartSearch, findClients, clientProfile, refreshClientProfile,
+export { addClient, editClient, removeClient, smartSearch, findClients, clientProfile,
         makeSale, filterClientProfileEdit, clientProfileEdit, getFallJobs}

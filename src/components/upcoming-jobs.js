@@ -3,30 +3,49 @@ import EditUpcomingJob from './edit-upcoming-job'
 
 class UpcomingJobs extends Component{
 
-
   constructor(props){
+    console.log("UUUU", props)
     super(props)
     this.state = {
-      editModal: null
+      job: "null",
+      upcomingJobs: props.cp_up
     }
+    this.fireEditUpcomingJob = this.fireEditUpcomingJob.bind(this)
     this.editUpcomingJob = this.editUpcomingJob.bind(this)
     this.deleteUpcomingJob = this.deleteUpcomingJob.bind(this)
   }
 
-  editUpcomingJob(job){
-    var editModal = <EditUpcomingJob job={job} editUpcomingJob={this.props.editUpcomingJob}/>
+  fireEditUpcomingJob(job){
     this.setState({
-      editModal: editModal
+      job: job
     })
   }
+
+  editUpcomingJob(id, jobdesc, sdate){
+    this.props.editUpcomingJob(id, jobdesc, sdate)
+
+  }
+
 
   deleteUpcomingJob(jobid){
     this.props.deleteUpcomingJob(jobid)
     this.props.clientProfile(this.props.cfid)
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      upcomingJobs: nextProps.cp_up
+    })
+  }
+
+
   render(){
-    var upcomingJobs = this.props.cp_up.map((job)=>{
+      console.log("FUCKKK", this.state.upcomingJobs.length)
+      if(this.state.upcomingJobs.length==0){
+        return []
+      }
+
+      var upcomingJobs = this.state.upcomingJobs.map((job)=>{
       return <tr key={job.id}>
               <td>
                   <button
@@ -42,15 +61,17 @@ class UpcomingJobs extends Component{
                <td>
                  <button
                    data-toggle="modal"
-                   data-target="#editUpcomingJobModal"
+                   data-target="#exampleModal"
                    className="btn btn-primary"
-                   onClick={()=>this.editUpcomingJob(job)}
+                   onClick={()=>this.fireEditUpcomingJob(job)}
                  >
                   Edit Job
                  </button>
                </td>
              </tr>
     })
+
+    console.log("Job State:", this.state)
     return(
       <div>
         <br/><h3>Upcoming Jobs {this.props.cp_up.length}</h3>
@@ -68,33 +89,12 @@ class UpcomingJobs extends Component{
           </tbody>
         </table>
 
-        <div className="container" id="edit_upcoming_job">
-          <div className="modal fade" id="editUpcomingJobModal" role="dialog">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal">&times;</button>
-                  <h4 className="modal-title">Edit Upcoming Job</h4>
-                </div>
-                <div className="modal-body">
-                 { this.state.editModal }
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <EditUpcomingJob job={this.state.job} editUpcomingJob={this.props.editUpcomingJob}/>
       </div>
+
     )
 
   }
 }
 
 export default UpcomingJobs
-
-
-
-// <button type="button" onClick={this.makeSale} className="btn btn-default" data-dismiss="modal">Close</button>

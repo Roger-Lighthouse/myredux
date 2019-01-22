@@ -51,7 +51,7 @@ class List extends Component {
           <td>{" "} - {" "}</td>
           <td>{item.msg}</td>
           <td>
-            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" 
               onClick={() => this.replaceModalItem(index)}>edit</button> {" "}
             <button className="btn btn-danger" onClick={() => this.deleteItem(index)}>remove</button>
           </td>

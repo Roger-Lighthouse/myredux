@@ -6,7 +6,9 @@ const initialList = {
   completedJobs: [],
   upcomingJobs: [],
   saleSuccess: false,
-  deletedUpcomingJobID: null
+  deletedUpcomingJobID: null,
+  refreshClientProfile: false
+
 }
 
 function jobReducer(state = initialList, action){
@@ -37,6 +39,13 @@ function jobReducer(state = initialList, action){
         ...state,
         deletedUpcomingJobID: action.payload.data.id
       }
+    case 'EDIT_UPCOMING_JOB_FULFILLED':
+      console.log(action)
+      return {
+        ...state,
+        refreshClientProfile: true
+    }
+
     default:
       return state;
     }

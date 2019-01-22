@@ -56,7 +56,6 @@ class ClientMakeSale extends Component {
       type: this.state.selectedType,
       sdate: this.state.sdate
     })
-    console.log("OK But Still Got Here FU")
   }
 
   handleJobChange(e){
@@ -79,13 +78,6 @@ class ClientMakeSale extends Component {
    );
  }
 
-componentDidMount() {
-  console.log("componentDidMount");
- }
-
- componentWillUnmount() {
-   console.log("componentWillUnmount");
- }
 
  render() {
 
@@ -99,7 +91,7 @@ componentDidMount() {
          </div>
          <div className="form-group">
            <Select
-             value={ this.state.selectedOption }
+             value={ this.state.selectedJob  }
              onChange={this.handleJobChange}
              options={options}
            />

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import ClientProfile from '../containers/client-profile-container'
+import { NavLink } from 'react-router-dom';
+
 
 class SmartSearch extends Component {
 
@@ -41,7 +43,6 @@ class SmartSearch extends Component {
       this.setState({
         loading: "Loading..."
       })
-  //    this._text.value = ""
       this.setState({
         text: this._text.value
       })
@@ -72,7 +73,9 @@ class SmartSearch extends Component {
          <td>{client.name}</td>
          <td>{client.address}</td>
          <td>{client.phone}</td>
-         <td><button className="btn btn-link" onClick={()=>this.fireClientProfile(client.cfid)}>Client Profile</button></td>
+         <td><button className="btn btn-link" onClick={()=>this.fireClientProfile(client.cfid)}><NavLink to={`${client.cfid}/clientprofile/${"nut"}`}>Client Profile</NavLink></button></td>
+
+
        </tr>
        ))}
        </tbody>

@@ -9,7 +9,6 @@ import { bindActionCreators } from 'redux'
 function mapStateToProps(state){
   return {
     smartSearch: state.client.smartSearch,
-    filterClientProfile: state.client.filterClientProfile
   }
 }
 
