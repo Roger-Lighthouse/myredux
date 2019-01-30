@@ -4,9 +4,9 @@ import EditUpcomingJob from './edit-upcoming-job'
 class UpcomingJobs extends Component{
 
   constructor(props){
-    console.log("UUUU", props)
     super(props)
     this.state = {
+      cfid: props.cfid,
       job: "null",
       upcomingJobs: props.cp_up
     }
@@ -29,7 +29,6 @@ class UpcomingJobs extends Component{
 
   deleteUpcomingJob(jobid){
     this.props.deleteUpcomingJob(jobid)
-    this.props.clientProfile(this.props.cfid)
   }
 
   componentWillReceiveProps(nextProps){
@@ -40,12 +39,10 @@ class UpcomingJobs extends Component{
 
 
   render(){
-      console.log("FUCKKK", this.state.upcomingJobs.length)
-      if(this.state.upcomingJobs.length==0){
+      if(this.state.upcomingJobs.length===0){
         return []
       }
-
-      var upcomingJobs = this.state.upcomingJobs.map((job)=>{
+    var upcomingJobs = this.state.upcomingJobs.map((job)=>{
       return <tr key={job.id}>
               <td>
                   <button
@@ -56,12 +53,13 @@ class UpcomingJobs extends Component{
                   </button>
                </td>
                <td>{ job.id }</td>
+               <td>{ job.jobinfoid }</td>
                <td>{ job.jobdesc }</td>
                <td>{ job.sdate }</td>
                <td>
                  <button
                    data-toggle="modal"
-                   data-target="#exampleModal"
+                   data-target="#upcomingJobModal"
                    className="btn btn-primary"
                    onClick={()=>this.fireEditUpcomingJob(job)}
                  >
@@ -71,7 +69,6 @@ class UpcomingJobs extends Component{
              </tr>
     })
 
-    console.log("Job State:", this.state)
     return(
       <div>
         <br/><h3>Upcoming Jobs {this.props.cp_up.length}</h3>
@@ -79,6 +76,7 @@ class UpcomingJobs extends Component{
           <thead>
             <tr>
               <th>JobID</th>
+              <th>JobInfoID</th>
               <th>Job Desc</th>
               <th>Start Date</th>
               <th></th>

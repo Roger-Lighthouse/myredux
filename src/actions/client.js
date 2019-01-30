@@ -44,13 +44,6 @@ function clientProfile(cfid){
   }
 }
 
-function refreshClientProfile(cfid){
-  const request = axios.get(`http://localhost:3000/api/clients/${cfid}/client_profile.json`)
-  return {
-    type: 'REFRESH_CLIENT_PROFILE',
-    payload: request
-  }
-}
 
 function makeSale(saleInfo){
   const request = axios.post(`http://localhost:3000/api/clients/make_sale.json`, saleInfo)
@@ -59,15 +52,6 @@ function makeSale(saleInfo){
     payload: request
   }
 }
-
-function filterClientProfileEdit(value) {
-  console.log("Got Here")
-  return {
-    type: 'FILTER_CLIENT_PROFILE_EDIT',
-    value: value
-  }
-}
-
 
 function clientProfileEdit(cfid, name, address, phone, email) {
   var editObject = {
@@ -84,6 +68,30 @@ function clientProfileEdit(cfid, name, address, phone, email) {
   }
 }
 
+function editUpcomingJob(id, jobdesc, sdate){
+  const editInfo = {
+    id: id,
+    jobdesc: jobdesc,
+    sdate: sdate
+  }
+  const request = axios.post(`http://localhost:3000/api/jobs/edit_upcoming_job.json`, editInfo)
+  return {
+    type: 'EDIT_UPCOMING_JOB',
+    payload: request
+  }
+}
+
+function fetchConnCalls(){
+  const request = axios.get(`http://localhost:3000/api/clients/conn_calls.json`)
+    return {
+      type: 'FETCH_CONN_CALLS',
+      payload: request
+    }
+
+}
+
+
 
 export { addClient, editClient, removeClient, smartSearch, findClients, clientProfile,
-        makeSale, filterClientProfileEdit, clientProfileEdit, getFallJobs}
+        makeSale, editUpcomingJob, clientProfileEdit, getFallJobs,
+        fetchConnCalls}

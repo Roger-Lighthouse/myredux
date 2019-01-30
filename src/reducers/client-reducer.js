@@ -13,7 +13,7 @@ const initialState = {
 
   findClients: [],
   smartSearch:[],
-  clientProfile: [],
+  clientProfileInfo: [],
   clientProfileProps: [],
   clientProfileUpcomingJobs: [],
   editClient: false,
@@ -63,23 +63,14 @@ function clientReducer(state = initialState, action){
         smartSearch: action.payload.data,
       })
     case 'CLIENT_PROFILE_FULFILLED':
-      console.log("CP Fulfilled:", action.payload)
       return({
         ...state,
-        clientProfile: action.payload.data.info,
+        clientProfileInfo: action.payload.data.info,
         clientProfileProps: action.payload.data.props,
         clientProfileUpcomingJobs: action.payload.data.upcoming,
         smartSearch: [],
       })
-    case 'REFRESH_CLIENT_PROFILE_FULFILLED':
-      console.log(action.payload)
-      return({
-        ...state,
-        clientProfile: action.payload.data.info,
-        clientProfileProps: action.payload.data.props,
-        clientProfileUpcomingJobs: action.payload.data.upcoming,
-      })
-      case 'FILTER_CLIENT_PROFILE_EDIT':
+    case 'FILTER_CLIENT_PROFILE_EDIT':
       return({
         ...state,
         editClient: true
@@ -92,11 +83,17 @@ function clientReducer(state = initialState, action){
         editClient: false
         })
     case 'MAKE_SALE_FULFILLED':
-      console.log(action)
+      let upc = state.clientProfileUpcomingJobs
+      upc = [...state.clientProfileUpcomingJobs, action.payload.data]
       return {
         ...state,
-        upcomingJobs: action.payload.data,
-        refreshClientProfile: true
+        clientProfileUpcomingJobs: upc
+      }
+    case 'FETCH_CONN_CALLS_FULFILLED':
+      console.log("Nut", action.payload.data)
+      return {
+        ...state,
+        connCalls: action.payload.data
       }
     default:
       return state

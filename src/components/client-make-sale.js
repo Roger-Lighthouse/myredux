@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Select from 'react-select';
-//import { Button, Modal, OverlayTrigger, Popover, Tooltip } from 'react-bootstrap'
 
 
 const options = [
@@ -59,7 +58,6 @@ class ClientMakeSale extends Component {
   }
 
   handleJobChange(e){
-   console.log("E-JOb", e)
    this.setState(
      { selectedJob: e.value }
    );
@@ -72,7 +70,6 @@ class ClientMakeSale extends Component {
  }
 
  handleDateChange(){
-   console.log(this._date.value)
    this.setState(
      { sdate: this._date.value }
    );

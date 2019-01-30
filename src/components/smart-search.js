@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ClientProfile from '../containers/client-profile-container'
 import { NavLink } from 'react-router-dom';
 
 
@@ -11,9 +10,6 @@ class SmartSearch extends Component {
       text: "",
       loading: ""
     }
-
-
-
     this.searchClient = this.searchClient.bind(this)
     this.updateText = this.updateText.bind(this)
     this.fireClientProfile = this.fireClientProfile.bind(this)
@@ -57,38 +53,35 @@ class SmartSearch extends Component {
        <br/><br/><br/>
        <h3>#Clients: {this.props.smartSearch.length}</h3>
        <table className="table table-striped">
-       <thead>
-         <tr>
-           <td>CFID</td>
-           <td>Name</td>
-           <td>Address</td>
-           <td>Phone</td>
-           <td></td>
-         </tr>
-       </thead>
-       <tbody>
-       {this.props.smartSearch.map((client)=>(
-       <tr key={client.cfid}>
-         <td>{client.cfid}</td>
-         <td>{client.name}</td>
-         <td>{client.address}</td>
-         <td>{client.phone}</td>
-         <td><button className="btn btn-link" onClick={()=>this.fireClientProfile(client.cfid)}><NavLink to={`${client.cfid}/clientprofile/${"nut"}`}>Client Profile</NavLink></button></td>
-
-
-       </tr>
-       ))}
-       </tbody>
+         <thead>
+           <tr>
+             <td>CFID</td>
+             <td>Name</td>
+             <td>Address</td>
+             <td>Phone</td>
+             <td></td>
+           </tr>
+         </thead>
+         <tbody>
+           {this.props.smartSearch.map((client)=>(
+             <tr key={client.cfid}>
+               <td>{client.cfid}</td>
+               <td>{client.name}</td>
+               <td>{client.address}</td>
+               <td>{client.phone}</td>
+               <td>
+                 {//<button className="btn btn-link" onClick={()=>this.fireClientProfile(client.cfid)}>
+               }
+                   <NavLink to={`/${client.cfid}/clientprofile`}>Client Profile</NavLink>
+                 {//</button>
+                 }
+               </td>
+             </tr>
+           ))}
+         </tbody>
        </table>
        </div>
      )
-    }
-
-    var client_profile = null
-    if(this.props.filterClientProfile){
-      client_profile = (
-        <ClientProfile />
-      )
     }
 
     return(
@@ -102,7 +95,6 @@ class SmartSearch extends Component {
           <button type="submit">Smart Search</button>
         </form>
         {ans}
-        {client_profile}
       </div>
     )
   }

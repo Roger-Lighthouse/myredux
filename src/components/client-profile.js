@@ -7,36 +7,43 @@ import ClientProfileEdit from '../components/client-profile-edit'
 class ClientProfile extends Component {
 
   constructor(props){
+    console.log("PeeRops: ",props)
     super(props)
-    this.state = {
-      cfid: null,
-      address: null,
-      phone: null,
-      rate: null,
-      email: null,
-      cp_up: [],
-      cp_props: []
-    }
+      this.state = {
+        cfid: props.match.params.id,
+        name: null,
+        address: null,
+        phone: null,
+        rate: null,
+        email: null,
+        cp_up: [],
+        cp_props: []
+      }
     this.editUpcomingJob = this.editUpcomingJob.bind(this)
+    this.makeSale = this.makeSale.bind(this)
+    this.deleteUpcomingJob = this.deleteUpcomingJob.bind(this)
+  }
 
+  componentDidMount(){
+    if(this.state.cfid)this.props.actions.clientProfile(this.state.cfid)
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("OK HERE", nextProps)
-    this.setState({
-      cfid: nextProps.cfid,
-      address: nextProps.address,
-      phone: nextProps.phone,
-      email: nextProps.email,
-      rating: nextProps.rate,
-      cp_up: nextProps.clientProfileUpcomingJobs,
-      cp_props: nextProps.clientProfileProps
-    })
+    console.log("Next Props: ", nextProps)
+      this.setState({
+        cfid: nextProps.clientProfileInfo.cfid,
+        name: nextProps.clientProfileInfo.name,
+        address: nextProps.clientProfileInfo.address,
+        phone: nextProps.clientProfileInfo.phone,
+        rate: nextProps.clientProfileInfo.rate,
+        email: nextProps.clientProfileInfo.email,
+        cp_up: nextProps.clientProfileUpcomingJobs,
+        cp_props: nextProps.clientProfileProps
+      })
   }
 
   editUpcomingJob(id, jobdesc, sdate){
     this.props.actions.editUpcomingJob(id, jobdesc, sdate)
-
     let up = this.state.cp_up
     up = up.map((curr_job)=>{
       if(curr_job.id===id){
@@ -46,71 +53,68 @@ class ClientProfile extends Component {
       return curr_job
     })
     this.setState({
-      upcomingJobs: up
+      cp_up: up
     })
   }
 
+  makeSale(job){
+    this.props.actions.makeSale(job)
+  }
+
+  deleteUpcomingJob(id){
+    this.props.actions.deleteUpcomingJob(id)
+    let up = this.state.cp_up
+    up = up.filter((job)=> job.id!==id)
+    this.setState({
+      cp_up: up
+    })
+
+  }
 
   render(){
     if(!this.state.cfid){
       return null
     }
     var upcomingJobs = null
-
-    console.log("cfid", this.state.cfid)
-    console.log("cp_up", this.state.cp_up)
-    console.log("Edit Up Job", this.editUpcomingJob)
-    console.log("delete", this.props.actions.deleteUpcomingJob)
     if(this.state.cp_up.length>0){
-
       upcomingJobs = <UpcomingJobs
        cfid={[this.state.cfid]}
        cp_up={this.state.cp_up}
        editUpcomingJob={this.editUpcomingJob}
-       deleteUpcomingJob={this.props.actions.deleteUpcomingJob}
+       deleteUpcomingJob={this.deleteUpcomingJob}
       />
     }
     var propList = ""
     if(this.props.clientProfileProps.length>0){
-     propList = <PropertyList cfid={this.state.cfid} cp_props={this.state.cp_props} makeSale={this.props.actions.makeSale} />
+     propList = <PropertyList cfid={this.state.cfid} cp_props={this.state.cp_props} makeSale={this.makeSale} />
     }
-    var editClient = ""
-      editClient =
-      <ClientProfileEdit
-        cfid={this.props.cfid}
-        name={this.props.name}
-        address={this.props.address}
-        phone={this.props.phone}
-        email={this.props.email}
-        fireEdit={this.props.actions.clientProfileEdit}/>
     return(
       <span className="client-profile">
       <div>
-      {this.props.cfid}<br/>
-      {this.props.name}&nbsp;[{this.props.rate}]<br/>
-        {this.props.address}(billing)<br/>
-        {this.props.phone}(phone)<br/>
-        {this.props.email}<br/>
+        {this.state.cfid}<br/>
+        {this.state.name}&nbsp;[{this.state.rate}]<br/>
+        {this.state.address}(billing)<br/>
+        {this.state.phone}(phone)<br/>
+        {this.state.email}<br/>
       </div>
-      <button type="button" className="btn btn-link" data-toggle="modal" data-target="#myModal">Edit Client</button>
-      <div className="container" id="edit-client">
-        <div className="modal fade" id="myModal" role="dialog">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal">&times;</button>
-                <h4 className="modal-title">Edit Client</h4>
-              </div>
-              <div className="modal-body">
-                {editClient}
-              </div>
-              <div className="modal-footer">
-                <button type="button" onClick={this.testModal} className="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <button
+        data-toggle="modal"
+        data-target="#editClientModal"
+        className="btn btn-primary"
+        >
+        Editsis Client
+      </button>
+
+              <ClientProfileEdit
+                cfid={this.state.cfid}
+                name={this.state.name}
+                address={this.state.address}
+                phone={this.state.phone}
+                email={this.state.email}
+                fireEdit={this.props.actions.clientProfileEdit} />
+
+
       <div>
       { propList }
       { upcomingJobs }

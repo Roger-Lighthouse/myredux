@@ -16,10 +16,7 @@ class PropertyList extends Component {
 
 
   makeSale(jobinfoid, address){
-    console.log('Got into Make Sale' +jobinfoid+address)
-    //this.props.makeSale(jobinfoid, address)
-    var clientMakeSale = <ClientMakeSale showModal={true} clientProfile={this.props.clientProfile} cfid={this.props.cfid} jobinfoid={jobinfoid} address={address} makeSale={this.props.makeSale} saleSuccess={this.props.saleSuccess}/>
-    //var clientMakeSale = <SaleModal clientProfile={this.props.clientProfile} cfid={this.props.cfid} jobinfoid={jobinfoid} address={address} makeSale={this.props.makeSale} saleSuccess={this.props.saleSuccess}/>
+    var clientMakeSale = <ClientMakeSale showModal={true} clientProfile={this.props.clientProfile} cfid={this.props.cfid} jobinfoid={jobinfoid} address={address} makeSale={this.props.makeSale}/>
     this.setState({
       clientMakeSale: clientMakeSale
     })
